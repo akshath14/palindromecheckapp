@@ -1,20 +1,22 @@
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
 
-        String input = "noon";
+        String input = "civic";
 
+        Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
 
-        // Push each character into the stack
+        // Insert characters into both queue and stack
         for (char c : input.toCharArray()) {
-            stack.push(c);
+            queue.add(c);     // FIFO
+            stack.push(c);    // LIFO
         }
 
         boolean isPalindrome = true;
 
-        // Pop and compare with original string
-        for (char c : input.toCharArray()) {
-            if (c != stack.pop()) {
+        // Compare dequeue (queue) with pop (stack)
+        while (!queue.isEmpty()) {
+            if (queue.remove() != stack.pop()) {
                 isPalindrome = false;
                 break;
             }
